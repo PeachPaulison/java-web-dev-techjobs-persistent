@@ -18,6 +18,11 @@ public class EmployerController {
     @Autowired
     private EmployerRepository employerRepository;
 
+    @GetMapping("employers")
+    public String index(Model model) {
+        model.addAttribute("employer",employerRepository.findAll());
+        return "employers/index";
+    }
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
@@ -30,9 +35,12 @@ public class EmployerController {
                                     Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("employer", "Add Employer");
             return "employers/add";
         }
-
+      //  employerRepository.write method?  public static void add(Employer employer) {
+        //        employer.put(employer.getId(), employer);??
+        //    }
         return "redirect:";
     }
 
