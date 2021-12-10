@@ -2,7 +2,9 @@ package org.launchcode.techjobs.persistent.controllers;
 
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
+import org.launchcode.techjobs.persistent.models.Skill;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
+import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ public class HomeController {
 
     @Autowired
     public EmployerRepository employerRepository;
+    @Autowired
+    public SkillRepository skillRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -32,6 +36,19 @@ public class HomeController {
     public String displayAddJobForm(Model model) {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
+
+        // Get all skills from the skillsRepository and put them in a List of SKill objects
+        List<Skill> skills = (List <Skill>) skillRepository.findAll();
+         model.addAttribute("skills", skills);
+
+        // Get all employers from the employerRepository and put them in a List of Employer objects
+        List<Employer> employers = (List <Employer>) employerRepository.findAll();
+        model.addAttribute("employers", employers);
+
+//         model.addAttribute("skills", (List <Skill>)skillRepository.findAll()); //cast to List of Skill?
+
+
+
         return "add";
     }
 
@@ -43,7 +60,13 @@ public class HomeController {
             model.addAttribute("title", "Add Job");
             return "add";
         }
-        employerRepository.findAll();
+        // get the emmployer form the employerRepository that has the employerId selected from the drop menu
+        Optional<Employer> employer = employerRepository.findById(employerId);
+
+        // get the skills form the skillRepository that have the skillId's selected from the checkboxes
+
+       //
+
         return "redirect:";
     }
 
