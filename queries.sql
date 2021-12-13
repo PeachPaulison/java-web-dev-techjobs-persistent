@@ -7,9 +7,9 @@ WHERE location = "St. Louis City";
 -- Part 3: Test it with SQL
 DROP TABLE job;
 -- Part 4: Test it with SQL
+
 --SELECT * FROM skill INNER JOIN job_skills ON job_skills.skills_id = skill.id ORDER BY name ASC;
 --
---Thought it should be this but this wouldn't pass TESTTASKFOUR SQL Test -- Why didn't this work?
 SELECT * FROM skill
 LEFT JOIN job_skills ON skill.id = job_skills.skills_id
 WHERE job_skills.job.id IS NOT NULL
