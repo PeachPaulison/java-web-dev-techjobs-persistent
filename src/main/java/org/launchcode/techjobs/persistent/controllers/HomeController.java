@@ -63,7 +63,7 @@ public class HomeController {
             model.addAttribute("title", "Add Job");
             return "add";
         }
-        // get the emmployer form the employerRepository that has the employerId selected from the drop menu
+        // get the emmployer from the employerRepository that has the employerId selected from the drop menu
         Optional<Employer> employer = employerRepository.findById(employerId);
 
         // get the skills form the skillRepository that have the skillId's selected from the checkboxes
